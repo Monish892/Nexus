@@ -11,5 +11,8 @@
     "typecheck": "npm run typecheck --workspaces",
     "test": "npm run test --workspaces"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "engines": { "node": ">=20" }
 }
