@@ -1,0 +1,11 @@
+CREATE TYPE "AnalysisStatus" AS ENUM ('QUEUED', 'RUNNING', 'COMPLETED', 'FAILED');
+CREATE TABLE "Repository" ("id" TEXT NOT NULL, "userId" TEXT NOT NULL, "githubId" INTEGER NOT NULL, "owner" TEXT NOT NULL, "name" TEXT NOT NULL, "fullName" TEXT NOT NULL, "url" TEXT NOT NULL, "description" TEXT, "primaryLanguage" TEXT, "stars" INTEGER NOT NULL DEFAULT 0, "forks" INTEGER NOT NULL DEFAULT 0, "isPrivate" BOOLEAN NOT NULL DEFAULT false, "languages" JSONB, "analyzedAt" TIMESTAMP(3), "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP, "updatedAt" TIMESTAMP(3) NOT NULL, CONSTRAINT "Repository_pkey" PRIMARY KEY ("id"));
+CREATE UNIQUE INDEX "Repository_userId_githubId_key" ON "Repository"("userId", "githubId");
+CREATE INDEX "Repository_userId_updatedAt_idx" ON "Repository"("userId", "updatedAt");
+ALTER TABLE "Repository" ADD CONSTRAINT "Repository_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE "RepositoryAnalysis" ("id" TEXT NOT NULL, "repositoryId" TEXT NOT NULL, "status" "AnalysisStatus" NOT NULL DEFAULT 'COMPLETED', "summary" TEXT NOT NULL, "signals" JSONB NOT NULL, "scores" JSONB NOT NULL, "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP, CONSTRAINT "RepositoryAnalysis_pkey" PRIMARY KEY ("id"));
+CREATE INDEX "RepositoryAnalysis_repositoryId_createdAt_idx" ON "RepositoryAnalysis"("repositoryId", "createdAt");
+ALTER TABLE "RepositoryAnalysis" ADD CONSTRAINT "RepositoryAnalysis_repositoryId_fkey" FOREIGN KEY ("repositoryId") REFERENCES "Repository"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE "DeveloperScore" ("id" TEXT NOT NULL, "userId" TEXT NOT NULL, "overall" INTEGER NOT NULL, "breakdown" JSONB NOT NULL, "evidence" JSONB NOT NULL, "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP, CONSTRAINT "DeveloperScore_pkey" PRIMARY KEY ("id"));
+CREATE INDEX "DeveloperScore_userId_createdAt_idx" ON "DeveloperScore"("userId", "createdAt");
+ALTER TABLE "DeveloperScore" ADD CONSTRAINT "DeveloperScore_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

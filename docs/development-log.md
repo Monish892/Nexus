@@ -35,3 +35,27 @@
 ### Next Day
 
 - Add authentication, user profiles, protected routes, RBAC, and the dashboard shell.
+
+## Day 2 — In progress
+
+### Completed
+
+- Created `feature/nexus-complete-platform` from the Day 1 `master` base.
+- Added Prisma models and migration for users, profiles, opaque sessions, roles, and audit logs.
+- Added registration, login, logout, session lookup, protected profile APIs, admin audit-log authorization, bcrypt password hashing, HTTP-only cookies, rate limiting, CORS, security headers, and consistent validation errors.
+- Added registration/login pages and a protected dashboard shell with real empty states.
+
+### Verified
+
+- API lint, typecheck, and build: passed.
+- Web lint, typecheck, and production build: passed.
+- Prisma client generation and schema validation: passed with `DATABASE_URL` supplied.
+
+### Blocked verification
+
+- Database migration application could not be verified because Docker Compose/PostgreSQL was unavailable in the current environment.
+- Database-backed and E2E tests are not yet implemented.
+
+### Next
+
+- Add database-backed auth/profile tests and finish the GitHub/evidence vertical slice before expanding into later intelligence modules.
