@@ -1,0 +1,1 @@
+export default function Health() { return <main className="health"><p className="eyebrow">NEXUS / HEALTH</p><h1>Foundation services</h1><p>Web shell is operational. API and AI service integrations are configured for local development.</p><a href="/">← Back to NEXUS</a></main> }
