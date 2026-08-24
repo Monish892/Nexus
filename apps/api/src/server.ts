@@ -16,6 +16,8 @@ import { jobRouter } from './routes/job';
 import { interviewRouter } from './routes/interview';
 import { codingRouter } from './routes/coding';
 import { roadmapRouter } from './routes/roadmap';
+import { notificationRouter } from './routes/notification';
+import { intelligenceRouter } from './routes/intelligence';
 
 export const app = express();
 
@@ -37,6 +39,8 @@ app.use('/jobs', jobRouter);
 app.use('/interviews', interviewRouter);
 app.use('/coding', codingRouter);
 app.use('/roadmaps', roadmapRouter);
+app.use('/notifications', notificationRouter);
+app.use('/intelligence', intelligenceRouter);
 app.use('/repositories', githubRouter); // For backwards compatibility
 
 app.use((_req, res) => { res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Route not found' } }) });
