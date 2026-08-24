@@ -13,6 +13,7 @@ import { githubRouter } from './routes/github';
 import { adminRouter } from './routes/admin';
 import { resumeRouter } from './routes/resume';
 import { jobRouter } from './routes/job';
+import { interviewRouter } from './routes/interview';
 
 export const app = express();
 
@@ -31,6 +32,7 @@ app.use('/github', githubRouter);
 app.use('/admin', adminRouter);
 app.use('/resume', resumeRouter);
 app.use('/jobs', jobRouter);
+app.use('/interviews', interviewRouter);
 app.use('/repositories', githubRouter); // For backwards compatibility
 
 app.use((_req, res) => { res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Route not found' } }) });
