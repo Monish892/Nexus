@@ -11,4 +11,6 @@ flowchart LR
   AI --> Vector[(pgvector / future)]
 ```
 
-Day 1 deliberately establishes contracts and runtime health endpoints before feature modules.
+Authentication uses server-side, opaque sessions. Only a SHA-256 token hash is persisted; the raw token is sent in an HTTP-only, SameSite cookie. API authorization is enforced by middleware and role checks, independently of frontend route protection. User profiles are a one-to-one extension of the user identity, and auth/profile events are audit logged.
+
+Day 2 adds the first protected product flow: register → login → authenticated dashboard → logout. Intelligence modules deliberately render empty states until evidence is ingested.
