@@ -11,6 +11,7 @@ import { profileRouter } from './routes/profile';
 import { dashboardRouter } from './routes/dashboard';
 import { githubRouter } from './routes/github';
 import { adminRouter } from './routes/admin';
+import { resumeRouter } from './routes/resume';
 
 export const app = express();
 
@@ -27,6 +28,7 @@ app.use('/profile', profileRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/github', githubRouter);
 app.use('/admin', adminRouter);
+app.use('/resume', resumeRouter);
 app.use('/repositories', githubRouter); // For backwards compatibility
 
 app.use((_req, res) => { res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Route not found' } }) });
